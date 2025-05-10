@@ -2875,7 +2875,7 @@ touch ./views/auth/thanks.ejs
 
 In `authController.js`, we'll render this EJS page after the user registers.
 
-In `registerUser.js`, replace our `res.send` with this:
+In `registerUser`, replace our `res.send` with this:
 
 ```js
 res.render('./auth/thanks.ejs', { user })
@@ -2928,7 +2928,7 @@ No separate controller is needed in this case since it's a simple render route.
 
 After our user signs in, let's redirect them to their profile page which we'll set up later.
 
-In `authController.js`, in our `signInUser.js` controller, replace the `res.send` with this:
+In `authController.js`, in our `signInUser` controller, replace the `res.send` with this:
 
 ```js
 res.redirect(`/users/${user._id}`)
