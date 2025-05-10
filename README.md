@@ -1,6 +1,6 @@
 # Mongoose Recipes
 
-![Cooking](./images/cooking.png)
+![Michael & Patch Cook Dinner](./images/hero.png)
 
 
 ## Description
@@ -13,6 +13,14 @@ In this codealong, we will build a full stack MEN (Mongoose Express Node) applic
 - **Fork** and **Clone** this repository
 - `cd` into the newly cloned directory
 - `code .` to open in VS Code
+
+As you go through this codealong, feel free to push your changes up to GitHub after each step!
+
+```sh
+git add .
+git commit -m "some descriptive message"
+git push origin main
+```
 
 
 ## 📖 Table of Contents
@@ -299,6 +307,7 @@ For now, let's stop our server by pressing <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
 ---
 
+
 ### Environment Variables
 
 First, let's set up a file where we can hide secure information - a `.env` file.
@@ -508,6 +517,8 @@ Successfully connected to MongoDB database . . .
 [📖 Back to Top](#-table-of-contents)
 
 ---
+
+![Michael & Patch Choose a Recipe](./images/recipe.png)
 
 
 ## Creating Models with the Mongoose Schema Class
@@ -781,7 +792,7 @@ Creating and testing the EJS views will be done *after* we know all of our serve
 ---
 
 
-![Prep](./images/prep.png)
+![Michael & Patch Do Some Prep](./images/ingredients.png)
 
 
 ## Auth CRUD Functionality
@@ -1114,7 +1125,7 @@ Now, creating the `session` object:
 
 ```js
 req.session.user = {
-  username: user.username,
+  email: user.email,
   _id: user._id
 }
 ```
@@ -1167,7 +1178,7 @@ const signInUser = async (req, res) => {
       // This will be also be an EJS page...
     }
     req.session.user = {
-      username: user.username,
+      email: user.email,
       _id: user._id
     }
     res.send(`Thanks for signing in, ${user.first}!`)
@@ -1380,7 +1391,7 @@ We've completed the process again from *route* to *controller* to *testing*! Don
 ---
 
 
-![Mixing](./images/mixing.png)
+![Michael & Patch Call the Fire Department](./images/fire.png)
 
 
 ## User CRUD Functionality
@@ -1501,7 +1512,7 @@ At the bottom of our file, we'll create a module.exports that will export all of
 
 ```js
 module.exports = {
-  registerUser
+  getUserById
 }
 ```
 
@@ -1804,7 +1815,7 @@ Another round with the pattern - complete!
 ---
 
 
-![Fridge Run](./images/fridge.png)
+![Michael & Patch Put It in the Oven](./images/oven.png)
 
 
 ## Recipe CRUD Functionality
@@ -2647,7 +2658,7 @@ This same mindset should be used in real world websites *and* your projects.
 ---
 
 
-![Oven](./images/oven.png)
+![Michael & Patch Plate the Meal](./images/plating.png)
 
 
 ## Creating Our EJS Views
@@ -3423,7 +3434,7 @@ footer {
 ---
 
 
-![Let's Eat!](./images/eat.png)
+![Michael & Patch Sit Down for Family Meal](./images/family.png)
 
 
 ## Recap
@@ -3451,7 +3462,7 @@ ERD Tools:
 - [draw.io](https://app.diagrams.net/)
 - [LucidChart](https://www.lucidchart.com/)
 
-![Done](./images/done.png)
+![Michael & Patch are Satisfied](./images/end.png)
 
 [📖 Back to Top](#-table-of-contents)
 
