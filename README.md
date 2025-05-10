@@ -1562,7 +1562,7 @@ const userController = require('../controllers/userController.js')
 In the route we left hanging earlier, we'll simply reference the function we want to use!
 
 ```js
-router.post('/sign-up', authController.registerUser)
+router.get('/:id', userController.getUserById)
 ```
 
 Below this, we need to export `router`.
