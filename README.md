@@ -2644,6 +2644,8 @@ The pattern once again shows us it's quality.
 
 ---
 
+![Michael & Patch Plate the Meal](./images/plating.png)
+
 
 ## Reflecting on the Server Build
 
@@ -2658,7 +2660,7 @@ This same mindset should be used in real world websites *and* your projects.
 ---
 
 
-![Michael & Patch Plate the Meal](./images/plating.png)
+![Michael & Patch Sit Down for Family Meal](./images/family.png)
 
 
 ## Creating Our EJS Views
@@ -3313,6 +3315,14 @@ res.render('./recipes/confirm.ejs')
 
 Here is some styling that will work with the EJS pages we've done so far, but feel free to make your own!
 
+In order to host a *static* file in our Node environment, we need a line of code in our `server.js`. Just underneath our `const app = express()`, add:
+
+```js
+app.use(express.static('public'))
+```
+
+Now you're project will be able to find and use our `style.css` file.
+
 <br>
 
 <details>
@@ -3434,7 +3444,7 @@ footer {
 ---
 
 
-![Michael & Patch Sit Down for Family Meal](./images/family.png)
+![Michael & Patch are Satisfied](./images/end.png)
 
 
 ## Recap
@@ -3462,8 +3472,10 @@ ERD Tools:
 - [draw.io](https://app.diagrams.net/)
 - [LucidChart](https://www.lucidchart.com/)
 
-![Michael & Patch are Satisfied](./images/end.png)
+![Michael & Patch Enjoy the Credits](./images/credits.png)
 
 [📖 Back to Top](#-table-of-contents)
 
 ---
+
+![Michael & Patch Enjoying Some Time Off](./images/jet-skiing.png)
