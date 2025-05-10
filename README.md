@@ -3484,7 +3484,7 @@ ERD Tools:
 - [draw.io](https://app.diagrams.net/)
 - [LucidChart](https://www.lucidchart.com/)
 
-![Michael & Patch Enjoy the Credits](./images/credits.png)
+![Michael & Patch Enjoy the Credits](./images/credits.gif)
 
 [📖 Back to Top](#-table-of-contents)
 
