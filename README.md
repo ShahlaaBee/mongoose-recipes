@@ -3315,6 +3315,18 @@ res.render('./recipes/confirm.ejs')
 
 Here is some styling that will work with the EJS pages we've done so far, but feel free to make your own!
 
+Let's make a folder to hold our CSS.
+
+```sh
+mkdir public
+```
+
+Then, create your stylesheet:
+
+```sh
+touch ./public/style.css
+```
+
 In order to host a *static* file in our Node environment, we need a line of code in our `server.js`. Just underneath our `const app = express()`, add:
 
 ```js
