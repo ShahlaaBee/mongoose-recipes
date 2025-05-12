@@ -1762,7 +1762,7 @@ const updatePassword = async (req, res) => {
     // This will be an EJS page later...
   } catch (error) {
     console.error(
-      'An error has occurred updating a user's password!',
+      "An error has occurred updating a user's password!",
       error.message
     )
   }
