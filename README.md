@@ -1,13 +1,11 @@
 # Mongoose Recipes
 
-![Michael & Patch Cook Dinner](./images/hero.png)
+![Cooking](./images/cooking.png)
 
 
 ## Description
 
 In this codealong, we will build a full stack MEN (Mongoose Express Node) application with full CRUD operations and user authentication.  The goal will be to build an app where user's can sign up, sign in, sing out, change their password, and create, read, update, and delete recipes.
-
-You can go [here](https://mongoose-recipes.fly.dev/) and see a deployed version of what we plan to build.
 
 
 ## Getting Started
@@ -15,14 +13,6 @@ You can go [here](https://mongoose-recipes.fly.dev/) and see a deployed version 
 - **Fork** and **Clone** this repository
 - `cd` into the newly cloned directory
 - `code .` to open in VS Code
-
-As you go through this codealong, feel free to push your changes up to GitHub after each step!
-
-```sh
-git add .
-git commit -m "some descriptive message"
-git push origin main
-```
 
 
 ## 📖 Table of Contents
@@ -309,7 +299,6 @@ For now, let's stop our server by pressing <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
 ---
 
-
 ### Environment Variables
 
 First, let's set up a file where we can hide secure information - a `.env` file.
@@ -337,9 +326,9 @@ Leave the `.env` file empty for now.
 
 ### Getting Our Connection String
 
-We need to allow our server to access our database on [MongoDB Atlas](https://www.mongodb.com/atlas). To do this, we will always need our secure connection string. 
+We need to allow our server to access our database on MongoDB Atlas. To do this, we will always need our secure connection string. 
 
-To access this, [sign in](https://account.mongodb.com/account/login) to Atlas.
+To access this, sing in to Atlas.
 
 Once you arrive on the Overview page, click the Connect button as shown below:
 
@@ -358,7 +347,7 @@ Click the copy button to add the connection string to your clipboard. You do not
 ---
 
 
-### Setting Up the .env File
+### Setting Up the **.env** File
 
 We will take this string and paste it into our `.env` file under the variable name `MONGODB_URI`. Like this:
 
@@ -520,8 +509,6 @@ Successfully connected to MongoDB database . . .
 
 ---
 
-![Michael & Patch Choose a Recipe](./images/recipe.png)
-
 
 ## Creating Models with the Mongoose Schema Class
 
@@ -536,7 +523,7 @@ ERD stands for **E**ntity **R**elationship **D**iagram. We use this as a way of 
 
 ![ERD](./images/erd.png)
 
-There are many different tools you can use for creating an ERD. This one was made with [Canva](http://www.canva.com), but you could use anything. I've listed a few options in the [Resources Section](#-resources).
+There are many different tools you can use for creating an ERD. This one was made with [Canva](http://www.canva.com), but you could use anything. I've listed a few options in the [Resources Section](#📚-resources).
 
 Now that we have our plan in place, let's start setting up our model files.
 
@@ -794,7 +781,7 @@ Creating and testing the EJS views will be done *after* we know all of our serve
 ---
 
 
-![Michael & Patch Do Some Prep](./images/ingredients.png)
+![Prep](./images/prep.png)
 
 
 ## Auth CRUD Functionality
@@ -910,7 +897,7 @@ const hashedPassword = bcrypt.hashSync(req.body.password, 12)
 Now, creating the user:
 
 ```js
-await User.create({
+const user = await User.create({
   email: req.body.email,
   password: hashedPassword,
   first: req.body.first,
@@ -923,7 +910,7 @@ await User.create({
 Finally, sending a response:
 
 ```js
-res.send(`Thanks for signing up!`)
+res.send(`Thanks for signing up, ${user.first}!`)
 // This will be an EJS page later...
 ```
 
@@ -965,7 +952,7 @@ const registerUser = async (req, res) => {
       // This will be also be an EJS page...
     }
     const hashedPassword = bcrypt.hashSync(req.body.password, 12)
-    await User.create({
+    const user = await User.create({
       email: req.body.email,
       password: hashedPassword,
       first: req.body.first,
@@ -973,7 +960,7 @@ const registerUser = async (req, res) => {
       picture: req.body.picture,
       recipes: []
     })
-    res.send(`Thanks for signing up!`)
+    res.send(`Thanks for signing up, ${user.first}!`)
     // This will be an EJS page later...
   } catch (error) {
     console.error('An error has occurred registering a user!', error.message)
@@ -1046,12 +1033,13 @@ Now, we test with Insomnia or Postman - a `POST` request to `'http://localhost:3
 
 ```json
 {
-  "first": "Michael",
-  "last": "Lackey",
-  "email": "michael@email.com",
-  "password": "1234",
-  "confirmPassword": "1234",
-  "picture": "https://i.imgur.com/GS4i9HG.png"
+  "first": "John",
+  "last": "Doe",
+  "email": "john.doe@email.com",
+  "password": "john1234",
+  "confirmPassword": "john1234",
+  "picture": "https://imgur.com/a/1VRyfxY"
+
 }
 ```
 
@@ -1126,7 +1114,7 @@ Now, creating the `session` object:
 
 ```js
 req.session.user = {
-  email: user.email,
+  username: user.username,
   _id: user._id
 }
 ```
@@ -1179,7 +1167,7 @@ const signInUser = async (req, res) => {
       // This will be also be an EJS page...
     }
     req.session.user = {
-      email: user.email,
+      username: user.username,
       _id: user._id
     }
     res.send(`Thanks for signing in, ${user.first}!`)
@@ -1240,8 +1228,8 @@ Now, we test with Insomnia or Postman - a `POST` request to `'http://localhost:3
 
 ```json
 {
-  "email": "michael@email.com",
-  "password": "1234"
+  "email": "john.doe@email.com",
+  "password": "john1234"
 }
 ```
 
@@ -1392,7 +1380,7 @@ We've completed the process again from *route* to *controller* to *testing*! Don
 ---
 
 
-![Michael & Patch Call the Fire Department](./images/fire.png)
+![Mixing](./images/mixing.png)
 
 
 ## User CRUD Functionality
@@ -1486,7 +1474,6 @@ Now, to create a *new* object that only contains the data we want to send to the
 
 ```js
 const data = {
-  _id: user._id,
   first: user.first,
   last: user.last,
   picture: user.picture,
@@ -1514,7 +1501,7 @@ At the bottom of our file, we'll create a module.exports that will export all of
 
 ```js
 module.exports = {
-  getUserById
+  registerUser
 }
 ```
 
@@ -1531,7 +1518,6 @@ const getUserById = async (req, res) => {
     const user = await User.findById(req.params.id)
     // Returns the full user object, including their hashed password. Never send this to anyone other than the user it belongs to.
     const data = {
-      _id: user._id,
       first: user.first,
       last: user.last,
       picture: user.picture,
@@ -1565,7 +1551,7 @@ const userController = require('../controllers/userController.js')
 In the route we left hanging earlier, we'll simply reference the function we want to use!
 
 ```js
-router.get('/:id', userController.getUserById)
+router.post('/sign-up', authController.registerUser)
 ```
 
 Below this, we need to export `router`.
@@ -1668,19 +1654,6 @@ if (!user) {
 }
 ```
 
-Next, we need to confirm they know their current password, especially before changing to a new one. This is similar to signing in, but we *don't* need to reset the `session` object since they're already signed in:
-
-```js
-const validPassword = bcrypt.compareSync(
-  req.body.oldPassword,
-  user.password
-)
-if (!validPassword) {
-  return res.send('Your old password was not correct! Please try again.')
-  // This will be also be an EJS page...
-}
-```
-
 Now, to check the user's new password:
 
 ```js
@@ -1743,14 +1716,6 @@ const updatePassword = async (req, res) => {
       return res.send('No user with that ID exists!')
       // This will be an EJS page later...
     }
-    const validPassword = bcrypt.compareSync(
-      req.body.oldPassword,
-      user.password
-    )
-    if (!validPassword) {
-      return res.send('Your old password was not correct! Please try again.')
-      // This will be also be an EJS page...
-    }
     if (req.body.newPassword !== req.body.confirmPassword) {
       return res.send('Password and Confirm Password must match')
       // This will be also be an EJS page...
@@ -1763,7 +1728,7 @@ const updatePassword = async (req, res) => {
     // This will be an EJS page later...
   } catch (error) {
     console.error(
-      "An error has occurred updating a user's password!",
+      'An error has occurred updating a user's password!',
       error.message
     )
   }
@@ -1822,9 +1787,9 @@ Now, we test with Insomnia or Postman - a `PUT` request to `'http://localhost:30
 
 ```json
 {
-  "oldPassword": "1234",
-  "newPassword": "4321",
-  "confirmPassword": "4321"
+  "password": "john1234",
+  "newPassword": "1234john",
+  "confirmPassword": "1234john"
 }
 ```
 
@@ -1839,7 +1804,7 @@ Another round with the pattern - complete!
 ---
 
 
-![Michael & Patch Put It in the Oven](./images/oven.png)
+![Fridge Run](./images/fridge.png)
 
 
 ## Recipe CRUD Functionality
@@ -2066,8 +2031,8 @@ Now, we test with Insomnia or Postman - a `POST` request to `'http://localhost:3
 {
   "title": "Chicken Parmigiana",
   "description": "Chicken Parmigiana is a beloved Italian-American dish made from breaded chicken cutlets topped with marinara sauce and melted mozzarella and Parmesan cheese. It's typically served over a bed of spaghetti or with a side of garlic bread, delivering a savory, crispy, and comforting bite every time.",
-  "image": "https://i.imgur.com/LPzYS9q.png",
-  "author": "682197313293e5ff1069431e"
+  "image": "https://imgur.com/a/LS4Ta2q",
+  "author": "681cae44b173570be8f4bfd3"
 }
 ```
 
@@ -2511,13 +2476,13 @@ Now, we test with Insomnia or Postman - a `PUT` request to `'http://localhost:30
 
 ```json
 {
-  "title": "Patch's Famous Chicken Parmigiana"
+  "title": "Mom's Famous Chicken Parmigiana"
 }
 ```
 
 ![Update Recipe Response](./images/update-recipe-response.png)
 
-What's for dinner? Patch's Famous Pattern.
+What's for dinner? Mom's Famous Pattern.
 
 [📖 Back to Top](#-table-of-contents)
 
@@ -2668,8 +2633,6 @@ The pattern once again shows us it's quality.
 
 ---
 
-![Michael & Patch Plate the Meal](./images/plating.png)
-
 
 ## Reflecting on the Server Build
 
@@ -2684,7 +2647,7 @@ This same mindset should be used in real world websites *and* your projects.
 ---
 
 
-![Michael & Patch Sit Down for Family Meal](./images/family.png)
+![Oven](./images/oven.png)
 
 
 ## Creating Our EJS Views
@@ -2755,21 +2718,16 @@ In the following sections, you can copy/paste the EJS from these snippets to the
   <body>
     <nav>
       <a href="/">Home</a>
+      <a href="/recipes">All Recipes</a>
 
       <% if (!user) { %>
-
       <a href="/auth/sign-up">Sign Up</a>
       <a href="/auth/sign-in">Sign In</a>
-
       <% } else { %>
-
-      <a href="/recipes">All Recipes</a>
       <a href="/recipes/new">New Recipe</a>
       <a href="/users/<%= user._id %>">My Profile</a>
       <a href="/auth/sign-out">Sign Out</a>
-
       <% } %>
-
     </nav>
     <main>
 ```
@@ -2895,12 +2853,9 @@ touch ./views/auth/thanks.ejs
 ```html
 <%- include('../partials/header.ejs') %>
 
-<h2>Thanks for signing up!</h2>
-
-<h2>Sign in <a href="/auth/sign-in">here</a>.</h2>
+<h2>Thanks for signing up, <%= user.first %>!</h2>
 
 <%- include('../partials/footer.ejs') %>
-
 ```
 
 </details>
@@ -2909,10 +2864,10 @@ touch ./views/auth/thanks.ejs
 
 In `authController.js`, we'll render this EJS page after the user registers.
 
-In `registerUser`, replace our `res.send` with this:
+In `registerUser.js`, replace our `res.send` with this:
 
 ```js
-res.render('./auth/thanks.ejs')
+res.render('./auth/thanks.ejs', { user })
 ```
 
 [📖 Back to Top](#-table-of-contents)
@@ -2962,13 +2917,56 @@ No separate controller is needed in this case since it's a simple render route.
 
 After our user signs in, let's redirect them to their profile page which we'll set up later.
 
-In `authController.js`, in our `signInUser` controller, replace the `res.send` with this:
+In `authController.js`, in our `signInUser.js` controller, replace the `res.send` with this:
 
 ```js
 res.redirect(`/users/${user._id}`)
 ```
 
 This won't work yet, but we'll set it up soon.
+
+[📖 Back to Top](#-table-of-contents)
+
+---
+
+
+### Update Password Page
+
+This page allows the user to update their password.
+
+```sh
+touch ./views/auth/update-password.ejs
+```
+
+<br>
+
+<details>
+<summary>💡 <b>update-password.ejs</b></summary>
+
+```html
+<%- include('../partials/header.ejs') %>
+
+<h2>Update Password</h2>
+<form action="/auth/<%= user._id %>?_method=PUT" method="POST">
+  <input type="password" name="newPassword" placeholder="New Password" required />
+  <input type="password" name="confirmPassword" placeholder="Confirm New Password" required />
+  <button type="submit">Update</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>
+```
+
+</details>
+
+<br>
+
+In `authRouter.js`, render the route using our session object to grab the user info:
+
+```js
+router.get('/:id/update-password', (req, res) => {
+  res.render('./auth/update-password.ejs')
+})
+```
 
 [📖 Back to Top](#-table-of-contents)
 
@@ -3030,50 +3028,6 @@ Then, replace the `res.send` with the following:
 
 ```js
 res.render('./users/profile.ejs', { user })
-```
-
-[📖 Back to Top](#-table-of-contents)
-
----
-
-
-### Update Password Page
-
-This page allows the user to update their password.
-
-```sh
-touch ./views/auth/update-password.ejs
-```
-
-<br>
-
-<details>
-<summary>💡 <b>update-password.ejs</b></summary>
-
-```html
-<%- include('../partials/header.ejs') %>
-
-<h2>Update Password</h2>
-<form action="/auth/<%= user._id %>?_method=PUT" method="POST">
-  <input type="password" name="oldPassword" placeholder="Old Password" required />
-  <input type="password" name="newPassword" placeholder="New Password" required />
-  <input type="password" name="confirmPassword" placeholder="Confirm New Password" required />
-  <button type="submit">Update</button>
-</form>
-
-<%- include('../partials/footer.ejs') %>
-```
-
-</details>
-
-<br>
-
-In `authRouter.js`, render the route using our session object to grab the user info:
-
-```js
-router.get('/:id/update-password', (req, res) => {
-  res.render('./auth/update-password.ejs')
-})
 ```
 
 [📖 Back to Top](#-table-of-contents)
@@ -3174,25 +3128,15 @@ touch ./views/recipes/show.ejs
 ```html
 <%- include('../partials/header.ejs') %>
 
-<% console.log(recipe.author._id) %>
-
-<% console.log(user._id) %>
-
 <h2><%= recipe.title %></h2>
 <img src="<%= recipe.image %>" alt="<%= recipe.title %>" width="300" />
 <p><%= recipe.description %></p>
 
-<% if (user._id === recipe.author._id.toString()) { %>
-  
-<form action="/recipes/<%= recipe._id %>/edit">
-  <button>Edit</button>
-</form>
+<a href="/recipes/<%= recipe._id %>/edit">Edit</a>
 
 <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
   <button type="submit">Delete</button>
 </form>
-
-<% } %>
 
 <%- include('../partials/footer.ejs') %>
 ```
@@ -3204,10 +3148,8 @@ touch ./views/recipes/show.ejs
 In `recipeController.js`, update the `res.send` in `getRecipeById` with:
 
 ```js
-res.render('./recipes/show.ejs', { user: req.session.user, recipe })
+res.render('./recipes/show.ejs', { recipe })
 ```
-
-We've got a conditional statement in the show page that ensures only the user who made the recipe can edit or delete it. In order for that to work, we have to pass the `session` object to compare the `_id` fields.
 
 [📖 Back to Top](#-table-of-contents)
 
@@ -3360,26 +3302,6 @@ res.render('./recipes/confirm.ejs')
 
 Here is some styling that will work with the EJS pages we've done so far, but feel free to make your own!
 
-Let's make a folder to hold our CSS.
-
-```sh
-mkdir public
-```
-
-Then, create your stylesheet:
-
-```sh
-touch ./public/style.css
-```
-
-In order to host a *static* file in our Node environment, we need a line of code in our `server.js`. Just underneath our `const app = express()`, add:
-
-```js
-app.use(express.static('public'))
-```
-
-Now you're project will be able to find and use our `style.css` file.
-
 <br>
 
 <details>
@@ -3426,7 +3348,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 400px 20px;
+  padding: 40px 20px 20px;
   box-sizing: border-box;
 }
 
@@ -3448,27 +3370,18 @@ form {
   max-width: 500px;
   width: 100%;
   text-align: left;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 form input,
 form textarea,
 form button {
   display: block;
-  width: 90%;
+  width: 100%;
   padding: 10px;
   margin: 10px 0;
   font-family: inherit;
   border: 1px solid #bca98e;
   border-radius: 4px;
-}
-
-form textarea {
-  height: 150px;
 }
 
 button {
@@ -3510,7 +3423,7 @@ footer {
 ---
 
 
-![Michael & Patch are Satisfied](./images/end.png)
+![Let's Eat!](./images/eat.png)
 
 
 ## Recap
@@ -3519,17 +3432,10 @@ In this lesson, we learned how to set up a Node/Express server from scratch, how
 
 This is a BIG lesson, with lots of opportunities to make a mistake. So I've provided a [solution branch](https://github.com/NobodysLackey/mongoose-recipes/tree/solution) to this repository that you can clone down to see the final version.
 
-You can also view the deployed version [here](https://mongoose-recipes.fly.dev/).
-
 
 ## 📚 Resources
 
-Deployed Version:
-- [mongoose-recipes.fly.dev](https://mongoose-recipes.fly.dev/)
-- [Deploy Your Own!](https://expressdeployment.fly.dev/)
-
 Documentation:
-- [MongoDB Atlas](https://www.mongodb.com/atlas)
 - [Node Docs](https://nodejs.org/docs/latest/api/)
 - [Express Docs](https://expressjs.com/)
 - [Mongoose Docs](https://mongoosejs.com/docs/guide.html)
@@ -3545,10 +3451,8 @@ ERD Tools:
 - [draw.io](https://app.diagrams.net/)
 - [LucidChart](https://www.lucidchart.com/)
 
-![Michael & Patch Enjoy the Credits](./images/credits.gif)
+![Done](./images/done.png)
 
 [📖 Back to Top](#-table-of-contents)
 
 ---
-
-![Michael & Patch Enjoying Some Time Off](./images/jet-skiing.png)
